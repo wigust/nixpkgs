@@ -25,6 +25,8 @@ in
   server = stdenv.mkDerivation {
     name = "zabbix-${version}";
 
+    patches = [ ./deprecate-mbstring-internal-encoding.patch ];
+
     inherit src preConfigure;
 
     configureFlags = "--enable-agent --enable-server --with-pgsql --with-libcurl";

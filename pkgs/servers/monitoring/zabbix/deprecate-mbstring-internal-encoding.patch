@@ -1,0 +1,10 @@
+--- a/frontends/php/include/locales.inc.php	1970-01-01 03:00:01.000000000 +0300
++++ b/frontends/php/include/locales.inc.php	2018-07-18 00:18:43.675742896 +0300
+@@ -24,7 +24,6 @@
+ 
+ 	$res &= mbstrings_available();
+ 
+-	ini_set('mbstring.internal_encoding', 'UTF-8');
+ 	$res &= (ini_get('mbstring.internal_encoding') == 'UTF-8');
+ 
+ 	ini_set('mbstring.detect_order', 'UTF-8, ISO-8859-1, JIS, SJIS');
