@@ -16,6 +16,13 @@ let
       sed -i "s,/usr/,$out," lib/ansible/constants.py
     '';
 
+    postInstall = ''
+      mkdir -p $out/share/man/man1
+      for man in docs/man/man1/*; do
+        cp $man $out/share/man/man1/`basename $man`
+      done
+    '';
+
     doCheck = false;
     dontStrip = true;
     dontPatchELF = true;
