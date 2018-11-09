@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     ];
 
   preConfigure = ''
-    configureFlags="--mandir=$out/share/man"
+    configureFlags="--mandir=$out/share/man -fno-stack-protector"
 
     substituteInPlace x11vnc/unixpw.c \
         --replace '"/bin/su"' '"/run/wrappers/bin/su"' \
