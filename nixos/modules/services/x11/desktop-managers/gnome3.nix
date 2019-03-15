@@ -162,7 +162,8 @@ in {
 
     fonts.fonts = [
       pkgs.dejavu_fonts pkgs.cantarell-fonts
-      pkgs.source-sans-pro # Default monospace font in 3.32
+      pkgs.source-sans-pro
+      pkgs.source-code-pro # Default monospace font in 3.32
     ];
 
     services.xserver.displayManager.extraSessionFilePackages = [ pkgs.gnome3.gnome-session ]
