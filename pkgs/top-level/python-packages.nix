@@ -147,6 +147,8 @@ in {
 
   alerta-server = callPackage ../development/python-modules/alerta-server { };
 
+  pyzabbix = callPackage ../development/python-modules/pyzabbix { };
+
   androguard = callPackage ../development/python-modules/androguard { };
 
   phonenumbers = callPackage ../development/python-modules/phonenumbers { };
