@@ -164,6 +164,8 @@ in {
 
   pyzabbix = callPackage ../development/python-modules/pyzabbix { };
 
+  zabbix-alerta = callPackage ../development/python-modules/zabbix-alerta { };
+
   androguard = callPackage ../development/python-modules/androguard { };
 
   phonenumbers = callPackage ../development/python-modules/phonenumbers { };
