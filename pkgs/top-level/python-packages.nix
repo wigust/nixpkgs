@@ -160,6 +160,8 @@ in {
 
   alerta-server = callPackage ../development/python-modules/alerta-server { };
 
+  protobix = callPackage ../development/python-modules/protobix { };
+
   pyzabbix = callPackage ../development/python-modules/pyzabbix { };
 
   androguard = callPackage ../development/python-modules/androguard { };
