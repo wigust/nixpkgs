@@ -22,7 +22,7 @@ buildGoPackage rec {
     sha256 = "0npjgarbwih8j2ih1mshwyp4nj9h15phvg61kifh63p9mf4r63nn";
   };
 
-  patches = [ ./fix-shell-path.patch ];
+  patches = [ ./fix-shell-path.patch ./fix-kill.patch ];
 
   meta = with lib; {
     description = "GitLab Runner the continuous integration executor of GitLab";
