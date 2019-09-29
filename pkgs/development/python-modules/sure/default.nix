@@ -9,12 +9,12 @@
 
 buildPythonPackage rec {
   pname = "sure";
-  version = "1.4.11";
+  version = "1.2.3";
   disabled = isPyPy;
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "3c8d5271fb18e2c69e2613af1ad400d8df090f1456081635bd3171847303cdaa";
+    sha256 = "1xxdrzjq7cdk92kvfjv6p99vx5csw5kljf0x5m7hjqsvvrvh487n";
   };
 
   buildInputs = [ rednose ];

@@ -17,11 +17,11 @@
 
 buildPythonPackage rec {
   pname = "httpretty";
-  version = "0.9.6";
+  version = "0.8.6";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "01b52d45077e702eda491f4fe75328d3468fd886aed5dcc530003e7b2b5939dc";
+    sha256 = "0f295zj272plr9lhf80kgz19dxkargwv3ar83rwavrcy516mgg9n";
   };
 
   checkInputs = [ nose sure coverage mock rednose
@@ -31,6 +31,8 @@ buildPythonPackage rec {
   propagatedBuildInputs = [ six ];
 
   __darwinAllowLocalNetworking = true;
+
+  doCheck = false;
 
   meta = with stdenv.lib; {
     homepage = "https://falcao.it/HTTPretty/";
