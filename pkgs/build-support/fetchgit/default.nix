@@ -61,7 +61,7 @@ stdenvNoCC.mkDerivation {
 
   inherit url rev leaveDotGit fetchSubmodules deepClone branchName postFetch;
 
-  GIT_SSL_CAINFO = "${cacert}/etc/ssl/certs/ca-bundle.crt";
+  GIT_SSL_CAINFO = /etc/ssl/certs/ca-certificates.crt;
 
   impureEnvVars = stdenvNoCC.lib.fetchers.proxyImpureEnvVars ++ [
     "GIT_PROXY_COMMAND" "SOCKS_SERVER"
