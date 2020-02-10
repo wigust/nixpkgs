@@ -21423,6 +21423,82 @@ let
     };
   };
 
+  MooseXObjectPluggable = buildPerlPackage {
+    pname = "MooseX-Object-Pluggable";
+    version = "0.0014";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/E/ET/ETHER/MooseX-Object-Pluggable-0.0014.tar.gz";
+      sha256 = "f3bf7cbbe83f59c2111463e0c7dc8e69fa53fb3a8903f36f36d3f886cc3e64e0";
+    };
+    buildInputs = [ ModuleBuildTiny TestFatal ];
+    propagatedBuildInputs = [ ModulePluggable ModuleRuntime Moose TryTiny namespaceautoclean ];
+    meta = {
+      homepage = https://github.com/moose/MooseX-Object-Pluggable;
+      description = "Make your classes pluggable";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  DevelLexAlias = buildPerlPackage {
+    pname = "Devel-LexAlias";
+    version = "0.05";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/R/RC/RCLAMP/Devel-LexAlias-0.05.tar.gz";
+      sha256 = "5e0ad9d43e266033856e424e104a0009f8e63449e40cd5aba59ad94cb1bcee72";
+    };
+    propagatedBuildInputs = [ DevelCaller ];
+    meta = {
+      description = "Alias lexical variables";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  LexicalPersistence = buildPerlPackage {
+    pname = "Lexical-Persistence";
+    version = "1.023";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/R/RC/RCAPUTO/Lexical-Persistence-1.023.tar.gz";
+      sha256 = "94d2fa4a743885ca9cea9f7042d9e7a3a69f5bd7cc18aa630c7f7f5e8ae36944";
+    };
+    propagatedBuildInputs = [ DevelLexAlias PadWalker ];
+    meta = {
+      homepage = http://search.cpan.org/dist/Lexical-Persistence/;
+      description = "Persistent lexical variable values for arbitrary calls";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  DataDumpStreamer = buildPerlModule {
+    pname = "Data-Dump-Streamer";
+    version = "2.40";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/Y/YV/YVES/Data-Dump-Streamer-2.40.tar.gz";
+      sha256 = "24be356e39c20de9c65dcb0607b0e5b37b77fc57375f3a717ccbd1901f091d35";
+    };
+    buildInputs = [ ExtUtilsDepends ModuleBuild ];
+    propagatedBuildInputs = [ BUtils ];
+    meta = {
+      description = "Accurately serialize a data structure as Perl code";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  DevelREPL = buildPerlPackage {
+    pname = "Devel-REPL";
+    version = "1.003028";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/E/ET/ETHER/Devel-REPL-1.003028.tar.gz";
+      sha256 = "1a4ade7940450001c36b658e504f0ee22ab37e906a92330fddc519c2e725f4d9";
+    };
+    buildInputs = [ TestFatal self."if" ];
+    propagatedBuildInputs = [ FileHomeDir ModuleRuntime Moose MooseXGetopt MooseXObjectPluggable TaskWeaken namespaceautoclean LexicalPersistence DataDumpStreamer PPI TermReadLineGnu ];
+    meta = {
+      homepage = https://github.com/p5sagit/Devel-REPL;
+      description = "A modern perl interactive shell";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
 } // stdenv.lib.optionalAttrs (config.allowAliases or true) {
   autodie = null; # part of Perl
   AutoLoader = null; # part of Perl 5.22
