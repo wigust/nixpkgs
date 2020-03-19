@@ -269,8 +269,6 @@ lib.makeScope pkgs.newScope (self: with self; {
 
   gnome-panel = callPackage ./misc/gnome-panel { };
 
-  gnome-screensaver = callPackage ./misc/gnome-screensaver { };
-
   gnome-tweaks = callPackage ./misc/gnome-tweaks { };
 
   gpaste = callPackage ./misc/gpaste { };
