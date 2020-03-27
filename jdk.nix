@@ -33,6 +33,12 @@ let
 
   mj-jdk7 = nixpkgsJdk7.jdk7.override ({ inherit cacert; });
 
+
+  # LANG=/gnu/store/03nvilh2x4z07dxv7h13gh986vvgpnsf-glibc-locales-2.29/lib/locale/2.29/en_US.UTF-8 /nix/store/2rmmbj648vmim0qa9fc0ksqsbghb8ifq-oraclejdk-7u75/bin/jcontrol
+  #
+  # # XXX: oracle java
+  # mj-adoptopenjdk-icedtea-web7 = (import (builtins.fetchTarball {url = "https://github.com/nixos/nixpkgs/archive/86062d7a952c9e8cdb0b370cedf1b010e0864bb4.tar.gz";}) { config = { allowUnfree = true; }; }).oraclejdk7;  
+
   mj-adoptopenjdk-icedtea-web7 =
     nixpkgsJdk7.icedtea7_web.override { jdk = mj-jdk7; };
 
