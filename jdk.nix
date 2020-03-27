@@ -15,6 +15,7 @@ with import (builtins.fetchTarball {
     ];
   };
 };
+
 let
   cacert = (import <nixpkgs> {
     overlays = [
@@ -24,10 +25,23 @@ let
       }))
     ];
   }).withMajordomoCacert.cacert;
-  mj-jdk = jdk.override ({ inherit cacert; });
-  mj-adoptopenjdk-icedtea-web = adoptopenjdk-icedtea-web.override { jdk =  mj-jdk; };
-  mj-wrapFirefox = wrapFirefox.override { adoptopenjdk-icedtea-web = mj-adoptopenjdk-icedtea-web; };
+
+  nixpkgsJdk7 = (import (builtins.fetchTarball {
+    url =
+      "https://github.com/nixos/nixpkgs/archive/bdb06c093670e41c004b4d48cce83c4f655e6d1d.tar.gz";
+  }) { });
+
+  mj-jdk7 = nixpkgsJdk7.jdk7.override ({ inherit cacert; });
+
+  mj-adoptopenjdk-icedtea-web7 =
+    nixpkgsJdk7.icedtea7_web.override { jdk = mj-jdk7; };
+
+  mj-wrapFirefox = wrapFirefox.override {
+    adoptopenjdk-icedtea-web = mj-adoptopenjdk-icedtea-web7;
+  };
+
   mj-firefox = mj-wrapFirefox firefox-esr-52-unwrapped { };
+
 in (stdenv.mkDerivation {
   name = "firefox-esr-52";
   builder = writeScript "builder.sh" (''
@@ -35,7 +49,7 @@ in (stdenv.mkDerivation {
     mkdir -p $out/bin
     cat > $out/bin/javaws <<'EOF'
     #!${bash}/bin/bash -e
-    exec -a javaws ${mj-adoptopenjdk-icedtea-web}/bin/javaws -Xnofork -Xignoreheaders  -allowredirect -nosecurity "$@"
+    exec -a javaws ${mj-adoptopenjdk-icedtea-web7}/bin/javaws -Xnofork -Xignoreheaders  -allowredirect -nosecurity "$@"
     EOF
     chmod 555 $out/bin/javaws
 
