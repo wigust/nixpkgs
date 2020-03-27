@@ -57,9 +57,19 @@ in (stdenv.mkDerivation {
     mkdir -p $out/bin
     cat > $out/bin/javaws <<'EOF'
     #!${bash}/bin/bash -e
-    exec -a javaws ${mj-adoptopenjdk-icedtea-web7}/bin/javaws -Xnofork -Xignoreheaders  -allowredirect -nosecurity "$@"
+    LANG=${glibcLocales}/lib/locale/locale-archive
+    exec -a javaws ${mj-adoptopenjdk-icedtea-web7}/bin/javaws -verbose "$@"
     EOF
     chmod 555 $out/bin/javaws
+
+    cat > $out/bin/ipmi <<'EOF'
+    #!${bash}/bin/bash -e
+    set -x
+    HOST=$IPMI_HOST
+    COOKIE=$(curl --data "WEBVAR_USERNAME=$IPMI_USER&WEBVAR_PASSWORD=$IPMI_PASSWORD" http://$HOST/rpc/WEBSES/create.asp | grep SESSION_COOKIE | cut -d\' -f 4)
+    curl --cookie Cookie=SessionCookie=$COOKIE http://$HOST/Java/jviewer.jnlp --output $IPMI_OUTPUT
+    EOF
+    chmod 555 $out/bin/ipmi
 
     cat > $out/bin/firefox-esr-52 <<'EOF'
     #!${bash}/bin/bash -e
