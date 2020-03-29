@@ -7,6 +7,9 @@ pipeline {
         MASTER_WORKTREE = "${LOCAL_WORKTREE}-master"
         GIT_PULL_COMMAND = "git pull --rebase upstream master"
     }
+    triggers {
+        cron("H 15 * * 1-5")
+    }
     stages {
         stage("Pulling from upstream Git") {
             steps {
