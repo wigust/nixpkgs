@@ -17,6 +17,7 @@
 , ktextwidgets
 , kwidgetsaddons
 , kxmlgui
+, sonnet
 }:
 
 let
@@ -55,7 +56,7 @@ in (if !buildClient then stdenv.mkDerivation else mkDerivation) rec {
     ++ lib.optionals (buildClient && withKDE) [
       extra-cmake-modules kconfigwidgets kcoreaddons
       knotifications knotifyconfig ktextwidgets kwidgetsaddons
-      kxmlgui
+      kxmlgui sonnet
     ];
 
   cmakeFlags = [
